@@ -53,6 +53,7 @@ func NewJSONMessage(m *router.Message) ([]byte, error) {
 			Image:    m.Container.Config.Image,
 			Hostname: m.Container.Config.Hostname,
 			Labels:   m.Container.Config.Labels,
+			Env:      m.Container.Config.Env,
 		},
 	}
 	js, err := json.Marshal(msg)
@@ -86,6 +87,7 @@ type DockerInfo struct {
 	Image    string      `json:"image"`
 	Hostname string      `json:"hostname"`
 	Labels   interface{} `json:"labels"`
+	Env      interface{} `json:"env"`
 }
 
 // LogstashMessage is a simple JSON input to Logstash.
@@ -95,4 +97,3 @@ type JSONMessage struct {
 	Source  string     `json:"source"`
 	Docker  DockerInfo `json:"docker"`
 }
-
