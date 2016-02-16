@@ -58,6 +58,12 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 		structuredData = route.Options["structured_data"]
 	}
 
+	if structuredData == "" {
+		structuredData = "-"
+	} else {
+		structuredData = fmt.Sprintf("[%s]", structuredData)
+	}
+
 	data := getopt("SYSLOG_DATA", "{{.Data}}")
 
 	var tmplStr string
