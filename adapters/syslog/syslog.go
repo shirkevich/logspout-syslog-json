@@ -69,7 +69,7 @@ func NewSyslogAdapter(route *router.Route) (router.LogAdapter, error) {
 	var tmplStr string
 	switch format {
 	case "rfc5424":
-		tmplStr = fmt.Sprintf("<%d>1 {{.Timestamp}} %s %s %d - [%s] %s\n",
+		tmplStr = fmt.Sprintf("<%d>1 {{.Timestamp}} %s %s %d - %s %s\n",
 			priority, hostname, tag, pid, structuredData, data)
 	case "rfc3164":
 		tmplStr = fmt.Sprintf("<%s>{{.Timestamp}} %s %s[%s]: %s\n",
