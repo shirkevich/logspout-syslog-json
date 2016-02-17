@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strings"
 
 	"github.com/gliderlabs/logspout/router"
 )
@@ -81,11 +82,11 @@ func (a *JSONAdapter) Stream(logstream chan *router.Message) {
 	}
 }
 
-func EnvToMap(envValues map) map {
-	result := make(map[string]string, 0, len(envValues))
+func EnvToMap(envValues []string) map[string]string {
+	result := make(map[string]string)
 	for _, env := range envValues {
 		s := strings.Split(env, "=")
-		result[s[0]] := s[1]
+		result[s[0]] = s[1]
 	}
 	return result
 }
