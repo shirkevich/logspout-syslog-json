@@ -81,11 +81,11 @@ func (a *JSONAdapter) Stream(logstream chan *router.Message) {
 	}
 }
 
-func EnvToMap(envValues map) (map) {
+func EnvToMap(envValues map) map {
 	result := make(map[string]string, 0, len(envValues))
 	for _, env := range envValues {
 		s := strings.Split(env, "=")
-		result[s[0]] = s[1]
+		result[s[0]] := s[1]
 	}
 	return result
 }
