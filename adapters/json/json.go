@@ -53,7 +53,7 @@ func NewJSONMessage(m *router.Message) ([]byte, error) {
 			Image:    m.Container.Config.Image,
 			Hostname: m.Container.Config.Hostname,
 			Labels:   m.Container.Config.Labels,
-			Env:      m.Container.Config.Env,
+			Env:      EnvToMap(m.Container.Config.Env),
 		},
 	}
 	js, err := json.Marshal(msg)
@@ -79,6 +79,15 @@ func (a *JSONAdapter) Stream(logstream chan *router.Message) {
 			continue
 		}
 	}
+}
+
+func EnvToMap(envValues map) (map) {
+	result := make(map[string]string, 0, len(envValues))
+	for _, env := range envValues {
+		s := strings.Split(env, "=")
+		result[s[0]] = s[1]
+	}
+	return result
 }
 
 type DockerInfo struct {
